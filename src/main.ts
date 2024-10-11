@@ -10,7 +10,7 @@ header.innerHTML = gameName;
 app.append(header);
 
 //upgrade count tracker
-const upgradeCount: { [key: string]: number } = { 
+const upgradeCount: { [key: string]: number } = {
   A: 0,
   B: 0,
   C: 0,
@@ -32,13 +32,19 @@ let growthRate: number = 0;
 const button = document.querySelector(".favorite") as HTMLButtonElement;
 const upgrades = [
   {
-    button: document.querySelector("#AUpgr") as HTMLButtonElement, cost: 10, rate: 0.1, name: "A",
+    button: document.querySelector("#AUpgr") as HTMLButtonElement,
+    cost: 10,
+    rate: 0.1,
   },
   {
-    button: document.querySelector("#BUpgr") as HTMLButtonElement, cost: 100, rate: 2.0, name: "B",
+    button: document.querySelector("#BUpgr") as HTMLButtonElement,
+    cost: 100,
+    rate: 2.0,
   },
   {
-    button: document.querySelector("#CUpgr") as HTMLButtonElement, cost: 1000, rate: 5.0, name: "C",
+    button: document.querySelector("#CUpgr") as HTMLButtonElement,
+    cost: 1000,
+    rate: 5.0,
   },
 ];
 
@@ -48,12 +54,14 @@ function updateButtonText() {
   button.textContent = `😏 Oh My x ${click_count.toFixed(2)}`;
 
   //check to see if player has amount required to upgrade
-  upgrades.forEach(upgrade => {
+  upgrades.forEach((upgrade) => {
     if (click_count >= upgrade.cost) {
       upgrade.button.disabled = false;
     } else {
       upgrade.button.disabled = true;
     }
+
+    upgrade.button.textContent = `Buy Upgrade ${upgrade.button.id} (${upgrade.cost} units, +${upgrade.rate} unit/sec)`;
   });
 
   updateGrowthRate();
@@ -95,12 +103,11 @@ upgrades.forEach((upgrade) => {
     if (click_count >= upgrade.cost) {
       click_count -= upgrade.cost;
       growthRate += upgrade.rate;
-      upgradeCount[upgrade.name as "A" | "B" | "C"]++;      
+      upgradeCount[upgrade.button.id]++;
+      upgrade.cost = upgrade.cost * 1.15;
       updateButtonText();
     }
   });
 });
-
-
 
 requestAnimationFrame(interval_incr);
