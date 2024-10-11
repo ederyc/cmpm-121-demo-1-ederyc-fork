@@ -2,7 +2,7 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Pushing Politics";
+const gameName = "Pushing Politics 🧑‍💼👩‍💼";
 document.title = gameName;
 
 const header = document.createElement("h1");
@@ -69,16 +69,16 @@ function updateButtonText() {
 }
 
 function updateGrowthRate() {
-  growthRateDisplay.textContent = `Current Growth Rate is ${growthRate.toFixed(2)} supporters/sec`;
+  growthRateDisplay.textContent = `You Are Currently Earning ${growthRate.toFixed(2)} supporters/sec!!`;
 }
 
 function updateUpgradesCount() {
   upgradeCountDisplay.innerHTML = `
     Upgrades Purchased:
     <ul>
-      <li>Flyers: ${upgradeCount.A}</li>
-      <li>Public Speech: ${upgradeCount.B}</li>
-      <li>TV AD: ${upgradeCount.C}</li>
+      <li>Flyers 📄: ${upgradeCount.A}</li>
+      <li>Public Speech 🎤: ${upgradeCount.B}</li>
+      <li>TV AD 📺: ${upgradeCount.C}</li>
     </ul>`;
 }
 
