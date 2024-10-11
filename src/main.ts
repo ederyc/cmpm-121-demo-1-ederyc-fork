@@ -2,7 +2,7 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Eder's super spectacular game";
+const gameName = "Pushing Politics";
 document.title = gameName;
 
 const header = document.createElement("h1");
@@ -32,17 +32,17 @@ let growthRate: number = 0;
 const button = document.querySelector(".favorite") as HTMLButtonElement;
 const upgrades = [
   {
-    button: document.querySelector("#AUpgr") as HTMLButtonElement,
+    button: document.querySelector("#Flyers") as HTMLButtonElement,
     cost: 10,
     rate: 0.1,
   },
   {
-    button: document.querySelector("#BUpgr") as HTMLButtonElement,
+    button: document.querySelector("#Public_Speech") as HTMLButtonElement,
     cost: 100,
     rate: 2.0,
   },
   {
-    button: document.querySelector("#CUpgr") as HTMLButtonElement,
+    button: document.querySelector("#TV_AD") as HTMLButtonElement,
     cost: 1000,
     rate: 5.0,
   },
@@ -51,7 +51,7 @@ const upgrades = [
 //amount was only being displayed when button was
 //clicked so this now constantly updates the amount of units being displayed
 function updateButtonText() {
-  button.textContent = `😏 Oh My x ${click_count.toFixed(2)}`;
+  button.textContent = `Supporters 🇺🇸 x ${click_count.toFixed(2)}`;
 
   //check to see if player has amount required to upgrade
   upgrades.forEach((upgrade) => {
@@ -61,7 +61,7 @@ function updateButtonText() {
       upgrade.button.disabled = true;
     }
 
-    upgrade.button.textContent = `Buy Upgrade ${upgrade.button.id} (${upgrade.cost} units, +${upgrade.rate} unit/sec)`;
+    upgrade.button.textContent = `Buy ${upgrade.button.id} (${upgrade.cost.toFixed(2)} units, +${upgrade.rate} unit/sec)`;
   });
 
   updateGrowthRate();
@@ -69,16 +69,16 @@ function updateButtonText() {
 }
 
 function updateGrowthRate() {
-  growthRateDisplay.textContent = `Current Growth Rate is ${growthRate.toFixed(2)} 😏/sec`;
+  growthRateDisplay.textContent = `Current Growth Rate is ${growthRate.toFixed(2)} supporters/sec`;
 }
 
 function updateUpgradesCount() {
   upgradeCountDisplay.innerHTML = `
     Upgrades Purchased:
     <ul>
-      <li>A: ${upgradeCount.A}</li>
-      <li>B: ${upgradeCount.B}</li>
-      <li>C: ${upgradeCount.C}</li>
+      <li>Flyers: ${upgradeCount.A}</li>
+      <li>Public Speech: ${upgradeCount.B}</li>
+      <li>TV AD: ${upgradeCount.C}</li>
     </ul>`;
 }
 
