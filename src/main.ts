@@ -83,7 +83,7 @@ const upgradeButtons: {
   upgradeButton.className = "upgrade";
   upgradeButton.id = item.name; // Use the name as the button ID
   upgradeButton.disabled = true; // Start as disabled
-  upgradeButton.innerText = `Buy ${item.name} (Cost ${item.cost}, +${item.rate} unit/sec)`;
+  upgradeButton.innerText = `Buy ${item.name} (Cost ${item.cost}, +${item.rate} supporters/sec)`;
   app.append(upgradeButton);
 
   return {
@@ -105,7 +105,7 @@ function updateButtonText() {
       upgrade.button.disabled = true;
     }
 
-    upgrade.button.textContent = `Buy ${upgrade.button.id} (Cost ${upgrade.cost.toFixed(2)} units, +${upgrade.rate} unit/sec)`;
+    upgrade.button.textContent = `Buy ${upgrade.button.id} (Cost ${upgrade.cost.toFixed(2)} supporters, +${upgrade.rate} supporters/sec)`;
   });
 
   updateGrowthRate();
