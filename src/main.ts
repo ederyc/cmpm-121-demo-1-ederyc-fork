@@ -5,16 +5,13 @@ const app: HTMLDivElement = document.querySelector("#app")!;
 const gameName = "Pushing Politics 🧑‍💼👩‍💼";
 document.title = gameName;
 
-const header = document.createElement("h1");
-header.innerHTML = gameName;
-app.append(header);
-
 // Define the Item interface with a description field
 interface Item {
   name: string;
   cost: number;
   rate: number;
   description: string;
+  emoji: string;
 }
 
 // Available items
@@ -24,18 +21,21 @@ const availableItems: Item[] = [
     cost: 10,
     rate: 0.1,
     description: "Spread the word with flyers to gain supporters!",
+    emoji: "📄",
   },
   {
     name: "Public Speech 🎤",
     cost: 100,
     rate: 2,
     description: "Capture hearts and minds with powerful speeches!",
+    emoji: "🎤",
   },
   {
     name: "TV AD 📺",
     cost: 1000,
     rate: 5,
     description: "Reach millions through eye-catching TV advertisements!",
+    emoji: "📺",
   },
   {
     name: "Social Media Campaign 📱",
@@ -43,12 +43,14 @@ const availableItems: Item[] = [
     rate: 10,
     description:
       "Leverage the power of social media to engage with the masses!",
+    emoji: "📱",
   },
   {
     name: "Community Events 🎉",
     cost: 20000,
     rate: 20,
     description: "Host fun events to rally community support and engagement!",
+    emoji: "🎉",
   },
 ];
 
@@ -152,9 +154,60 @@ upgradeButtons.forEach((upgrade) => {
       growthRate += upgrade.rate;
       upgradeCount[upgrade.button.id]++;
       upgrade.cost = upgrade.cost * COST_MULTIPLIER; // Increase cost for next purchase
+
+      // Call showEmoji with the corresponding emoji
+      const itemEmoji =
+        availableItems.find((item) => item.name === upgrade.button.id)?.emoji ||
+        "";
+      showEmoji(itemEmoji, upgrade.button);
       updateButtonText();
     }
   });
 });
 
 requestAnimationFrame(intervalIncr);
+
+// After setting the game name
+const titleSection = document.querySelector(".title-section") as HTMLDivElement;
+titleSection.innerHTML = `<h1>${gameName}</h1>`;
+
+// Update growthRateDisplay and upgradeCountDisplay to use the new sections
+const earningsSection = document.querySelector(
+  ".earnings-section",
+) as HTMLDivElement;
+earningsSection.append(growthRateDisplay);
+
+const updatesSection = document.querySelector(
+  ".updates-section",
+) as HTMLDivElement;
+updatesSection.append(upgradeCountDisplay);
+
+// Function to display the emoji with animation
+function showEmoji(emoji: string, button: HTMLButtonElement) {
+  const emojiElement = document.createElement("div");
+  emojiElement.className = "emoji";
+  emojiElement.innerText = emoji;
+
+  emojiElement.style.zIndex = "1000"; // ensure emoji appears in front
+
+  // Get the button's position and dimensions
+  const rect = button.getBoundingClientRect();
+  const buttonX = rect.left + rect.width / 2; // Center of the button
+  const buttonY = rect.top + window.scrollY; // Adjust for scrolling
+
+  // Set the emoji's position based on the button's position
+  emojiElement.style.left = `${buttonX}px`;
+  emojiElement.style.top = `${buttonY}px`;
+
+  document.body.appendChild(emojiElement);
+
+  // Trigger the fade-out animation after a short delay
+  requestAnimationFrame(() => {
+    emojiElement.classList.add("fade-out");
+  });
+
+  // Remove the element after the animation ends
+  setTimeout(() => {
+    emojiElement.remove();
+  }, 2000); // Match this timeout with the CSS transition duration
+}

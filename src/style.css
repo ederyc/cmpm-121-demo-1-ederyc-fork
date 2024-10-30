@@ -29,6 +29,47 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
+  background-color: #242424;
+  background-image: repeating-linear-gradient(
+    45deg,
+    red 0,
+    red 20px,
+    white 20px,
+    white 40px,
+    blue 40px,
+    blue 60px
+  );
+  background-size: 200% 200%;
+  animation: scroll-diagonal 15s linear infinite;
+}
+
+.title-section,
+.earnings-section,
+.updates-section {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem; /*Add some padding*/
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.emoji {
+  position: absolute;
+  bottom: 0; /* Start from the bottom of the screen */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2em;
+  opacity: 1;
+  transition:
+    opacity 1s ease,
+    transform 1s ease; /* Animate opacity and position */
+  z-index: 1000;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(-50px); /* Move up while fading out */
 }
 
 h1 {
@@ -41,6 +82,19 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  background-color: rgba (255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+
+@keyframes scroll-diagonal {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -100% -100%;
+  }
 }
 
 button {
